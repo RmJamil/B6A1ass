@@ -3,8 +3,7 @@ ________________________________________________________________________________
 
  Ans:
  Interface সাধারণত object structure define করার জন্য ব্যবহার করা হয়।
-
-    আবার, Interface এর একটি বড় সুবিধা হলো extend করা যায়।
+ আবার, নতুন interface কে child হিসেবে বর্ধিত করতে interface কে extend করা যায়।
 যেমনঃ 
      interface Person {
           name: string;
