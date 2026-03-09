@@ -1,6 +1,7 @@
 1. What are some differences between interfaces and types in TypeScript?
 _______________________________________________________________________________________
-     Interface সাধারণত object structure define করার জন্য ব্যবহার করা হয়।
+
+    Interface সাধারণত object structure define করার জন্য ব্যবহার করা হয়।
 
     আবার, Interface এর একটি বড় সুবিধা হলো extend করা যায়।
 যেমনঃ 
