@@ -13,6 +13,7 @@ const formatValue=(x:number|string|boolean):number|string|boolean=>{
 };
 
 
+
 const getLength=(value:string|unknown[]):number|string=>{
     let l=0;
 
@@ -25,7 +26,7 @@ const getLength=(value:string|unknown[]):number|string=>{
       });
     }
     return `${l};`;
-}
+};
 
 
 
@@ -41,29 +42,47 @@ class Person{
     getDetails(){
         return `'Name: ${this.name}, Age: ${this.age}';`;
     }
-}
-
-
-
-type User = { title: string; rating: number };
-type GenArr<T extends { rating: number }> = Array<T>;
-const filterByRating = (val: GenArr<User>): GenArr<User>=> {
-  return val.filter(one => one.rating >= 4);
 };
 
 
 
 
-type member={ 
-    id: number;
-    name:string;
-    email:string;
-    isActive:boolean ;
-}
-type GenAr<T>=Array<T>
-const filterActiveUsers=(items:GenAr<member>):GenAr<member>=>{
 
-    return items.filter(item=>item.isActive===true);
+type User = { title: string; rating: number };
+type GenArr<T extends { rating: number }> = Array<T>;
+
+const filterByRating = (val: GenArr<User>): string => {
+
+  const filtered = val.filter(one => one.rating >= 4);
+
+  const formatted = filtered
+    .map(b => `{ title: '${b.title}', rating: ${b.rating} }`)
+    .join(", ");
+
+  return `[${formatted}];`;
+};
+
+
+
+type Member = { 
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
+};
+
+type GenAr<T> = Array<T>;
+
+const filterActiveUsers = <T extends { isActive: boolean }>(
+  items: GenAr<Member>
+): string => {
+
+  const filtered = items.filter(item => item.isActive);
+
+  const formatted = filtered
+    .map(u => `{ id: ${u.id}, name: '${u.name}', email: '${u.email}', isActive: ${u.isActive} }`)
+    .join(", ");
+  return `[${formatted}];`;
 };
 
 
@@ -74,18 +93,19 @@ interface Book{
     publishedYear:number;
     isAvailable:boolean;
 }
-const printBookDetails=(item:Book):void=>{
+
+const printBookDetails=(item:Book):string=>{
      const availability = item.isAvailable ? "Yes" : "No";
-console.log(`Title: ${item.title}, Author: ${item.author}, Published: ${item.publishedYear}, Available: ${availability}`);
+return `Title: ${item.title}, Author: ${item.author}, Published: ${item.publishedYear}, Available: ${availability}`;
 };
 
 
 
-const getUniqueValues=(arr1:any[],arr2:any[]):any[]=>{
+const getUniqueValues=(arr1:any[],arr2:any[]):string=>{
 const arr=[...arr1,...arr2];
 const setarr=new Set(arr);
 const uniqueArr=Array.from(setarr);
-return uniqueArr;
+return `[${uniqueArr}];`;
 };
 
 
@@ -97,22 +117,18 @@ type Product={
     discount?:number;
 }
 type genProduct<T>=Array<T>;
-const calculateTotalPrice=(products:genProduct<Product>):number=>{
-    if(products.length===0) return 0;
+const calculateTotalPrice=(products:genProduct<Product>):string=>{
+    if(products.length===0) return "0;";
 
-   return products.reduce((acc,item)=>{
+   const total= products.reduce((acc,item)=>{
         if(!item.discount){
-             acc+=item.price*item.quantity;
+ acc+=item.price*item.quantity;
         }
         else if(item.discount){
             acc+=item.price*item.quantity-(item.discount*0.01*item.price*item.quantity);
         }
-         return acc;
+        return acc;
     },0);
+
+ return `${total};`;
 }
-
-
-
-
-
-
